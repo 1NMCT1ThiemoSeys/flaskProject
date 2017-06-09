@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}
+    Log in
+{% endblock %}
+
+{% block Login %}
+    class="active"
+{% endblock %}
+
+{% block body %}
+    <h1>Log hier in!</h1>
+
+
+    <form action="" method="post">
+        <input type="text" placeholder="Username" name="username" value="{{
+          request.form.username }}">
+         <input type="password" placeholder="Password" name="password" value="{{
+          request.form.password }}">
+        <input class="btn btn-default" type="submit" value="Login">
+      </form>
+
+    <p>{{ error }}</p>
+
+{% endblock %}
