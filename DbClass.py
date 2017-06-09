@@ -2,6 +2,8 @@ import werkzeug
 from werkzeug.security import generate_password_hash, \
      check_password_hash
 
+import time
+
 class DbClass:
     def __init__(self):
         import mysql.connector as connector
@@ -57,6 +59,48 @@ class DbClass:
         self.__cursor.close()
 
         if result!=[]:
+            return result
+        else:
+            return False
+
+    def geef_weerstation(self,id):
+        # Query met parameters
+        sqlQuery = "SELECT * FROM weerstation WHERE gebruikerId ='{param1}'"
+        # Combineren van de query en parameter
+        sqlCommand = sqlQuery.format(param1=id)
+        self.__cursor.execute(sqlCommand)
+        result = self.__cursor.fetchall()
+        self.__cursor.close()
+
+        if result != []:
+            return result
+        else:
+            return False
+
+    def geef_sensoren(self,id):
+        # Query met parameters
+        sqlQuery = "SELECT * FROM sensor WHERE weerstationId ='{param1}'"
+        # Combineren van de query en parameter
+        sqlCommand = sqlQuery.format(param1=id)
+        self.__cursor.execute(sqlCommand)
+        result = self.__cursor.fetchall()
+        self.__cursor.close()
+
+        if result != []:
+            return result
+        else:
+            return False
+
+    def geef_metingen(self,id):
+        # Query met parameters
+        sqlQuery = "SELECT * FROM meting WHERE sensorId ='{param1}'"
+        # Combineren van de query en parameter
+        sqlCommand = sqlQuery.format(param1=id)
+        self.__cursor.execute(sqlCommand)
+        result = self.__cursor.fetchall()
+        self.__cursor.close()
+
+        if result != []:
             return result
         else:
             return False
